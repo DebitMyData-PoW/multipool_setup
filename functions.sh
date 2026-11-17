@@ -1,6 +1,6 @@
 #####################################################
 # Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
-# Updated by cryptopool.builders-OLD-VERSION for crypto use...
+# Updated by cryptopool.builders for crypto use, and by DebitMyData for its pool.
 #####################################################
 
 ESC_SEQ="\x1b["
@@ -12,20 +12,22 @@ ESC_SEQ="\x1b["
  MAGENTA=$ESC_SEQ"35;01m"
  CYAN=$ESC_SEQ"36;01m"
 
+# Runs a command with its output hidden; if it fails, shows the output and stops the install.
 function hide_output {
 		OUTPUT=$(mktemp)
-		$@ &> $OUTPUT
+		"$@" &> "$OUTPUT"
 		E=$?
 		if [ $E != 0 ]; then
 		echo
-		echo FAILED: $@
+		echo "FAILED: $*"
 		echo -----------------------------------------
-		cat $OUTPUT
+		cat "$OUTPUT"
 		echo -----------------------------------------
+		rm -f "$OUTPUT"
 		exit $E
 		fi
 
-		rm -f $OUTPUT
+		rm -f "$OUTPUT"
 }
 
 function spinner
@@ -43,8 +45,12 @@ function spinner
 		printf "    \b\b\b\b"
 }
 
+# apt-get without questions (needrestart restarts what it must by itself). If it fails, the
+# install stops: a pool on half-installed packages is worse than no pool.
 function apt_get_quiet {
-		DEBIAN_FRONTEND=noninteractive hide_output sudo apt-get -yq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" "$@" & spinner
+		hide_output sudo env DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a apt-get -yq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" "$@" &
+		spinner
+		wait $! || exit 1
 }
 
 function apt_install {
@@ -54,12 +60,12 @@ function apt_install {
 
 function ufw_allow {
 		if [ -z "$DISABLE_FIREWALL" ]; then
-		sudo ufw allow $1 > /dev/null;
+		sudo ufw allow "$1" > /dev/null;
 		fi
 }
 
 function restart_service {
-		hide_output sudo service $1 restart
+		hide_output sudo service "$1" restart
 }
 
 ## Dialog Functions ##

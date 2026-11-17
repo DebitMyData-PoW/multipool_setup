@@ -1,23 +1,16 @@
 #####################################################
+# The first questions: the server's public IP addresses (found by asking the Internet, or asked).
 # Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
-# Updated by cryptopool.builders-OLD-VERSION for crypto use...
+# Updated by cryptopool.builders for crypto use, and by DebitMyData for its pool.
 #####################################################
 
 source /etc/functions.sh
 clear
-echo Checking for required setup files...
 
-# we double and triple check for required files
-if [ ! -f /usr/bin/dialog ] || [ ! -f /usr/bin/python3 ] || [ ! -f /usr/bin/pip3 ] || [ ! -f /usr/bin/acl ] || [ ! -f /usr/bin/nano ]; then
-sudo apt-get -q -q update
-sudo apt-get remove -y needrestart
-apt_get_quiet install dialog python3 python3-pip acl nano apt-transport-https || exit 1
-fi
-
-message_box "Ultimate Crypto-Server Setup Installer" \
-"Hello and thanks for using the Ultimate Crypto-Server Setup Installer!
-\n\nInstallation for the most part is fully automated. In most cases any user responses that are needed are asked prior to the installation.
-\n\nNOTE: You should only install this on a brand new Ubuntu 20.04 installation."
+message_box "DebitMyData pool installer" \
+"Hello, and thanks for installing the DebitMyData pool!
+\n\nThe install is mostly automated: the few questions come first, then it runs by itself.
+\n\nNOTE: install this only on a fresh Ubuntu 24.04 server."
 
 # If the machine is behind a NAT, inside a VM, etc., it may not know
 # its IP address on the public network / the Internet. Ask the Internet
