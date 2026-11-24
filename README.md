@@ -12,7 +12,7 @@ as, and the menu. It does nothing on its own: start from
 | `pre_setup.sh` | Finds the server's public IP addresses |
 | `menu.sh` | The menu: the YiiMP single server only |
 | `bootstrap_single.sh` | Downloads and starts [multipool_yiimp_single](https://github.com/DebitMyData-PoW/multipool_yiimp_single) |
-| `bootstrap_coin.sh` | The coin daemon builder, not in the menu until it builds DMD Core 1.3 (CMake) |
+| `bootstrap_coin.sh` | The coin daemon builder, not in the menu until it builds DebitMyData Core 1.3 (CMake) |
 | `functions.sh` | Shared functions, copied to `/etc/functions.sh` |
 
 Based on the installer by cryptopool.builders (Original-Tasty) and le2Ks, itself based on
