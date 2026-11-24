@@ -2,7 +2,9 @@
 
 The DebitMyData pool installer's first stage: the checks, the user account the install runs
 as, and the menu. It does nothing on its own: start from
-[DebitMyData-PoW/Multi-Pool-Installer](https://github.com/DebitMyData-PoW/Multi-Pool-Installer).
+[DebitMyData-PoW/Multi-Pool-Installer](https://github.com/DebitMyData-PoW/Multi-Pool-Installer),
+whose [INSTALL.md](https://github.com/DebitMyData-PoW/Multi-Pool-Installer/blob/master/INSTALL.md)
+explains the install.
 
 | File | What it does |
 | --- | --- |
